@@ -1,0 +1,32 @@
+.header__logo {
+  width: 104px;
+  height: 24px;
+  display: block;
+  object-fit: cover;
+  margin-left: 27px;
+  transition: all 0.5s ease-out;
+  cursor: pointer;
+  margin-bottom: 32px;
+  
+}
+
+.header__logo:hover {
+  background-image: linear-gradient(
+    to right,
+    #29323c,
+    #485563,
+    #2b5876,
+    #4e4376
+  );
+  box-shadow: 0 4px 15px 0 rgba(45, 54, 65, 0.75);
+  border-radius: 2px;
+}
+
+@media (min-width: 768px) {
+  .header__logo {
+    width: 142px;
+    height: 33px;
+    margin-bottom: 41px;
+    margin-left: 0;
+  }
+}

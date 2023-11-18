@@ -1,0 +1,13 @@
+.place__delete-btn {
+  background-image: url(../../../images/trash-can-icon.svg);
+  background-size: cover;
+  width: 18px;
+  height: 19px;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}
+
+.place__delete-btn:hover {
+  opacity: 0.6;
+}

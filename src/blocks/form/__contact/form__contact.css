@@ -1,0 +1,5 @@
+.form__contact {
+  all: unset;
+  display: flex;
+  flex-direction: column;
+}

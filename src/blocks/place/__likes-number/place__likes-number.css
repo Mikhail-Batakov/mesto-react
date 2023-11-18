@@ -1,0 +1,9 @@
+.place__likes-number {
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+  color: #000000;
+  display: block;
+  text-align: center;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+}

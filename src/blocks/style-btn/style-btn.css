@@ -1,0 +1,7 @@
+.style-btn {
+  all: unset;
+  background-size: cover;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  transition: opacity 0.5s ease-out;
+}
