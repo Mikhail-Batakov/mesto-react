@@ -14,7 +14,6 @@ function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState({});
   const [isImagePopup, setIsImagePopup] = useState(false);
-console.log(selectedCard);
 
 
   function handleEditProfileClick() {
@@ -50,7 +49,6 @@ console.log(selectedCard);
     setSelectedCard(card)
     setIsImagePopup(true)
 
-
   }
 
   // handleDelCard = () => {
@@ -60,7 +58,6 @@ console.log(selectedCard);
   // handleCard = () => {
 
   // }
-
 
   return (
     <div className="page">
@@ -187,10 +184,6 @@ console.log(selectedCard);
         isOpen={isImagePopup}
         onClose={closeAllPopups}
 
-
-      
-      
-      
       />
 
     

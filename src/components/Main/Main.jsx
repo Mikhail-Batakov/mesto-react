@@ -8,7 +8,6 @@ export default function Main({onEditProfile, onAddPlace, onEditAvatar, onCardCli
   const [userDescription, setUserDescription] = useState('');
   const [userAvatar, setUserAvatar] = useState('');
   const [cards, setCards] = useState([]);
-  console.log(cards)
 
 
   useEffect(() => {
@@ -24,8 +23,10 @@ export default function Main({onEditProfile, onAddPlace, onEditAvatar, onCardCli
       });
       setCards(cardData)
     })
+    .catch((error) => console.error(`Ошибка при загрузке данных ${error}`));
 
-}, [])
+
+  }, [])
 
   return(
     <main className="main">
