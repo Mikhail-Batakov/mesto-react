@@ -75,22 +75,32 @@ class Api {
     });
   }
 
-  // Метод установки лайков
-  setCardLike(cardId) {
+  // // Метод установки лайков
+  // setCardLike(cardId) {
+  //   return this._request(`${this._baseUrl}/cards/${cardId}/likes`, {
+  //     method: "PUT",
+  //     headers: this._headers,
+  //   });
+  // }
+
+  // // Метод удаления лайка карточки
+  // deleteCardLike(cardId) {
+  //   return this._request(`${this._baseUrl}/cards/${cardId}/likes`, {
+  //     method: "DELETE",
+  //     headers: this._headers,
+  //   });
+  // }
+
+  changeLikeCardStatus(cardId, isLiked) {
     return this._request(`${this._baseUrl}/cards/${cardId}/likes`, {
-      method: "PUT",
-      headers: this._headers,
-    });
+      method: `${!isLiked ? 'DELETE' : 'PUT'}`,
+      headers: this._headers
+    })
+    
   }
 
-  // Метод удаления лайка карточки
-  deleteCardLike(cardId) {
-    return this._request(`${this._baseUrl}/cards/${cardId}/likes`, {
-      method: "DELETE",
-      headers: this._headers,
-    });
-  }
 }
+
 
 // Создание экземпляра класса
 const api = new Api({

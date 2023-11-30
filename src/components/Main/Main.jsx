@@ -1,32 +1,11 @@
-import { useEffect, useState } from "react"
-import api from "../../utils/api";
+import { useContext } from "react"
 import Card from "../Card/Card.jsx";
+import CurrentUserContext from "../../contexts/CurrentUserContext.js";
+import Spinner from "../Spinner/Spinner.jsx";
+//import { PacmanLoader } from "react-spinners";
 
-
-export default function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick}) {
-  const [userName, setUserName] = useState('');
-  const [userDescription, setUserDescription] = useState('');
-  const [userAvatar, setUserAvatar] = useState('');
-  const [cards, setCards] = useState([]);
-
-
-  useEffect(() => {
-
-    Promise.all([api.getUserInfo(), api.getInitialCards()])
-      .then(([userData, cardData]) => {
-        setUserName(userData.name)
-        setUserDescription(userData.about)
-        setUserAvatar(userData.avatar)
-
-      cardData.forEach((element) => {
-        element.myId = userData._id
-      });
-      setCards(cardData)
-    })
-    .catch((error) => console.error(`Ошибка при загрузке данных ${error}`));
-
-
-  }, [])
+export default function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick, onDelCard, cards, isLoading, onCardLike}) {
+  const currentUser = useContext(CurrentUserContext)
 
   return(
     <main className="main">
@@ -39,11 +18,11 @@ export default function Main({onEditProfile, onAddPlace, onEditAvatar, onCardCli
           onClick={onEditAvatar}
           
         >
-          <img src={userAvatar} alt="Аватар профиля" className="profile__avatar" />
+          <img src={currentUser.avatar || '#'} alt="Аватар профиля" className="profile__avatar" />
         </button>
         <div className="profile__info">
           <div className="profile__name-container">
-            <h1 className="profile__name">{userName}</h1>
+            <h1 className="profile__name">{currentUser.name || ''}</h1>
             <button
               className="profile__edit-btn style-btn"
               type="button"
@@ -51,7 +30,7 @@ export default function Main({onEditProfile, onAddPlace, onEditAvatar, onCardCli
               onClick = {onEditProfile}
             />
           </div>
-          <p className="profile__job">{userDescription}</p>
+          <p className="profile__job">{currentUser.about || ''}</p>
         </div>
         <button
           className="profile__add-btn style-btn"
@@ -63,9 +42,10 @@ export default function Main({onEditProfile, onAddPlace, onEditAvatar, onCardCli
       {/* places */}
       <section className="places" aria-label="Места">
         <ul className="places__content">
-          {cards.map((card) => {
+        
+          {isLoading ? <Spinner/> : cards.map((card) => {
             return (
-              <Card card={card} key={card._id} onCardClick={onCardClick} />
+              <Card card={card} key={card._id} onCardClick={onCardClick} onDelCard={onDelCard} onCardLike={onCardLike} />
             )
           })}
         </ul>
