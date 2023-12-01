@@ -1,4 +1,4 @@
-export default function PopupWithForm({name, title, titleBtn, children, isOpen, onClose, onSubmit, isLoadingPopup}) {
+export default function PopupWithForm({name, title, titleBtn, children, isOpen, onClose, onSubmit, isLoadingPopup, isFormValid=true}) {
   return(
     <div className={`popup popup_type_${name} ${isOpen ? 'popup_opened' : ''}`} >
       <div className="popup__container">
@@ -12,7 +12,11 @@ export default function PopupWithForm({name, title, titleBtn, children, isOpen, 
         <form className="form" name="form-profile" noValidate onSubmit={onSubmit}>
           {children}
     
-          <button className="form__submit-btn style-btn" type="submit">
+          <button 
+            className={`form__submit-btn style-btn ${isFormValid ? '' : 'form__submit-btn_disabled'  }`} 
+            type="submit"
+            disabled = {isLoadingPopup}
+          >
             {isLoadingPopup ? `${titleBtn}...` : titleBtn}
           </button>
         </form>

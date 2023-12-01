@@ -35,17 +35,11 @@ export default function Card({ card, onCardClick, onDelCard, onCardLike }) {
           <span className="place__likes-number">{card.likes.length}</span>
         </div>
       </div>
-      {/* { card.myId === card.owner._id ?   <button
-        className="place__delete-btn style-btn"
-        type="button"
-        aria-label="Корзина"
-        onClick={onDelCard}
-      /> } */}
     {isOwn && <button
         className="place__delete-btn style-btn"
         type="button"
         aria-label="Корзина"
-        onClick={  () => onDelCard(card._id) }
+        onClick={() => onDelCard(card._id)}
       /> }
     </li> 
   )
