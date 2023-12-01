@@ -2,9 +2,10 @@ import { useContext, useEffect } from "react";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import useFormValidate from "../../utils/hooks/useFormValidate";
 import PopupWithForm from "../PopupWithForm/PopupWithForm";
+import usePopupCloser from "../../utils/hooks/usePopupCloser";
 
 
-export default function EditProfilePopup({isOpen, onClose, onUpdateUser, isLoadingPopup}) {
+export default function EditProfilePopup({isOpen, onClose, onUpdateUser, isLoadingPopup, onCloseEsc, onCloseOverlay}) {
   const currentUser = useContext(CurrentUserContext)
 
   const {  
@@ -23,6 +24,8 @@ export default function EditProfilePopup({isOpen, onClose, onUpdateUser, isLoadi
     setInitialValue("job", currentUser.about)
   }, [currentUser, setInitialValue])
 
+  usePopupCloser(isOpen, handleClosePopupResetForm)
+  
   function handleClosePopupResetForm() {
     onClose()
     resetForm({username: currentUser.name, job: currentUser.about})
@@ -33,7 +36,10 @@ export default function EditProfilePopup({isOpen, onClose, onUpdateUser, isLoadi
     onUpdateUser(formValues, resetForm);
   }
 
-  const inputErrorClass = (input) => (input in isInputValid ? !isInputValid[input] : false) ? 'form__input_type_error' : '';
+  const inputErrorClass = (input) =>
+  input in isInputValid && !isInputValid[input]
+    ? 'form__input_type_error'
+    : '';
 
   return(
     <PopupWithForm
@@ -45,6 +51,8 @@ export default function EditProfilePopup({isOpen, onClose, onUpdateUser, isLoadi
       isFormValid = { isFormValid }
       onSubmit={handleSubmit}
       isLoadingPopup = { isLoadingPopup }
+      onCloseEsc = {onCloseEsc}
+      onCloseOverlay = {onCloseOverlay}
       
     
     >

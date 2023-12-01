@@ -1,7 +1,8 @@
 import useFormValidate from "../../utils/hooks/useFormValidate";
+import usePopupCloser from "../../utils/hooks/usePopupCloser";
 import PopupWithForm from "../PopupWithForm/PopupWithForm";
 
-export default  function AddPlacePopup({isOpen, onClose, onAddPlace, isLoadingPopup}) {
+export default  function AddPlacePopup({isOpen, onClose, onAddPlace, isLoadingPopup, onCloseEsc, onCloseOverlay}) {
   const {  
     formValues,
     errors,
@@ -13,6 +14,8 @@ export default  function AddPlacePopup({isOpen, onClose, onAddPlace, isLoadingPo
 
   } = useFormValidate();
 
+  usePopupCloser(isOpen, handleClosePopupResetForm)
+
   function handleClosePopupResetForm() {
     onClose()
     resetForm()
@@ -23,7 +26,10 @@ export default  function AddPlacePopup({isOpen, onClose, onAddPlace, isLoadingPo
     onAddPlace(formValues, resetForm);
   }
 
-  const inputErrorClass = (input) => (input in isInputValid ? !isInputValid[input] : false) ? 'form__input_type_error' : '';
+  const inputErrorClass = (input) =>
+  input in isInputValid && !isInputValid[input]
+    ? 'form__input_type_error'
+    : '';
 
   return(
     <PopupWithForm
@@ -35,6 +41,8 @@ export default  function AddPlacePopup({isOpen, onClose, onAddPlace, isLoadingPo
     isFormValid = { isFormValid }
     onSubmit={handleSubmit}
     isLoadingPopup={isLoadingPopup}
+    onCloseEsc = {onCloseEsc}
+    onCloseOverlay = {onCloseOverlay}
   >
     <label className="form__label" htmlFor="name">
       <input

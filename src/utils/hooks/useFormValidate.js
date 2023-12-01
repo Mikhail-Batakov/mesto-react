@@ -26,6 +26,7 @@ function resetForm(data = {}) {
   setErrors({});
   setIsFormValid(false);
   setIsInputValid({});
+
 }
 
   const setInitialValue = useCallback ((name, value) => {

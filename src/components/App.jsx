@@ -18,7 +18,7 @@ function App() {
   const [isDelCardPopupOpen, setDelCardPopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState({});
   const [isImagePopup, setIsImagePopup] = useState(false);
-  const [isLoadingPopup, setIsLoadingPopup] = useState(false); //issend
+  const [isLoadingPopup, setIsLoadingPopup] = useState(false); 
 //стейт переменные котекста 
 const [currentUser, setCurrentUser] = useState({});
 //стейт переменные карточек
@@ -26,28 +26,6 @@ const [cards, setCards] = useState([]);
 const [isLoadingCards, setIsLoadingCards] = useState(true);
 
 const [delCardId, setDelCardId] = useState('');
-
-  useEffect(() => {
-    const handleEscClose = (event) => {
-      if (event.key === 'Escape') {
-        closeAllPopups();
-      }
-    };
-
-    const handleOverlayClick = (event) => {
-      if (event.target.classList.contains('popup')) {
-        closeAllPopups();
-      }
-    };
-
-    document.addEventListener('keydown', handleEscClose);
-    document.addEventListener('click', handleOverlayClick);
-
-    return () => {
-      document.removeEventListener('keydown', handleEscClose);
-      document.removeEventListener('click', handleOverlayClick);
-    };
-  }, []);
 
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true);
@@ -70,6 +48,7 @@ const [delCardId, setDelCardId] = useState('');
     setIsEditAvatarPopupOpen(false);
     setIsImagePopup(false);
     setDelCardPopupOpen(false);
+  
 
   }
 
@@ -79,7 +58,7 @@ const [delCardId, setDelCardId] = useState('');
 
   }
 
-  function handleDelCardClick(cardId) { ///
+  function handleDelCardClick(cardId) {
     setDelCardId(cardId)
     setDelCardPopupOpen(true);
 
@@ -164,6 +143,32 @@ const [delCardId, setDelCardId] = useState('');
       .finally(() => {setIsLoadingPopup(false)})
       
   }
+
+  // useEffect(() => {
+  //   function handleEsc(evt) {
+  //     if (evt.key === 'Escape') {
+  //       closeAllPopups();
+        
+  //     }
+  //   }
+  
+  //   function handleOverlayClick(evt) {
+  //     if (evt.target.classList.contains('popup_opened')) {
+  //       closeAllPopups();
+        
+  //     }
+  //   }
+  
+  //   if (isEditAvatarPopupOpen || isEditProfilePopupOpen || isAddPlacePopupOpen || selectedCard) {
+  //     document.addEventListener('keydown', handleEsc);
+  //     document.addEventListener('mousedown', handleOverlayClick);
+  //   }
+  
+  //   return () => {
+  //     document.removeEventListener('keydown', handleEsc);
+  //     document.removeEventListener('mousedown', handleOverlayClick);
+  //   };
+  // }, [isEditAvatarPopupOpen, isEditProfilePopupOpen, isAddPlacePopupOpen, selectedCard]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
