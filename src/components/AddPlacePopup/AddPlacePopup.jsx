@@ -1,24 +1,25 @@
 import useFormValidate from "../../utils/hooks/useFormValidate";
-import usePopupCloser from "../../utils/hooks/usePopupCloser";
 import PopupWithForm from "../PopupWithForm/PopupWithForm";
 
-export default  function AddPlacePopup({isOpen, onClose, onAddPlace, isLoadingPopup, onCloseEsc, onCloseOverlay}) {
-  const {  
+export default function AddPlacePopup({
+  isOpen,
+  onClose,
+  onAddPlace,
+  isLoadingPopup,
+}) {
+  const {
     formValues,
     errors,
-    isFormValid, 
+    isFormValid,
     isInputValid,
     handleChange,
     resetForm,
-
-
   } = useFormValidate();
 
-  usePopupCloser(isOpen, handleClosePopupResetForm)
 
   function handleClosePopupResetForm() {
-    onClose()
-    resetForm()
+    onClose();
+    resetForm();
   }
 
   function handleSubmit(evt) {
@@ -27,57 +28,55 @@ export default  function AddPlacePopup({isOpen, onClose, onAddPlace, isLoadingPo
   }
 
   const inputErrorClass = (input) =>
-  input in isInputValid && !isInputValid[input]
-    ? 'form__input_type_error'
-    : '';
+    input in isInputValid && !isInputValid[input]
+      ? "form__input_type_error"
+      : "";
 
-  return(
+  return (
     <PopupWithForm
-    name='add-place'
-    title='Новое место' 
-    titleBtn='Создать'
-    isOpen={isOpen}
-    onClose={handleClosePopupResetForm}
-    isFormValid = { isFormValid }
-    onSubmit={handleSubmit}
-    isLoadingPopup={isLoadingPopup}
-    onCloseEsc = {onCloseEsc}
-    onCloseOverlay = {onCloseOverlay}
-  >
-    <label className="form__label" htmlFor="name">
-      <input
-        id="name"
-        className={`form__input form__input_type_place-name ${inputErrorClass('name')}`}
-        name="name"
-        minLength={2}
-        maxLength={30}
-        type="text"
-        required
-        placeholder="Название"
-        value={formValues.name || ''}
-        disabled = {isLoadingPopup}
-        onChange={handleChange}
-      />
-      <span className="form__span-error name-error">{errors.name}</span>
-    </label>
-    <label className="form__label" htmlFor="link">
-      <input
-        id="link"
-        className={`form__input form__input_type_place-name ${inputErrorClass('link')}`}
-        name="link"
-        type="url"
-        required
-        placeholder="Ссылка на картинку"
-        value={formValues.link || ''}
-        disabled = {isLoadingPopup}
-        onChange={handleChange}
-      />
-      <span className="form__span-error link-error">{errors.link}</span>
-    </label>
-
-  </PopupWithForm>
-
-
-  )
-
+      name="add-place"
+      title="Новое место"
+      titleBtn="Создать"
+      isOpen={isOpen}
+      onClose={handleClosePopupResetForm}
+      isFormValid={isFormValid}
+      onSubmit={handleSubmit}
+      isLoadingPopup={isLoadingPopup}
+    >
+      <label className="form__label" htmlFor="name">
+        <input
+          id="name"
+          className={`form__input form__input_type_place-name ${inputErrorClass(
+            "name"
+          )}`}
+          name="name"
+          minLength={2}
+          maxLength={30}
+          type="text"
+          required
+          placeholder="Название"
+          value={formValues.name || ""}
+          disabled={isLoadingPopup}
+          onChange={handleChange}
+        />
+        <span className="form__span-error name-error">{errors.name}</span>
+      </label>
+      <label className="form__label" htmlFor="link">
+        <input
+          id="link"
+          className={`form__input form__input_type_place-name ${inputErrorClass(
+            "link"
+          )}`}
+          name="link"
+          type="url"
+          required
+          placeholder="Ссылка на картинку"
+          value={formValues.link || ""}
+          disabled={isLoadingPopup}
+          onChange={handleChange}
+        />
+        <span className="form__span-error link-error">{errors.link}</span>
+      </label>
+    </PopupWithForm>
+  );
 }

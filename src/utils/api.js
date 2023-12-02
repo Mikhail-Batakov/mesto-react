@@ -93,12 +93,10 @@ class Api {
 
   changeLikeCardStatus(cardId, isLiked) {
     return this._request(`${this._baseUrl}/cards/${cardId}/likes`, {
-      method: `${!isLiked ? 'DELETE' : 'PUT'}`,
-      headers: this._headers
-    })
-    
+      method: `${!isLiked ? "DELETE" : "PUT"}`,
+      headers: this._headers,
+    });
   }
-
 }
 
 // Создание экземпляра класса

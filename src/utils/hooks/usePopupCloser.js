@@ -1,30 +1,27 @@
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
 function usePopupCloser(isOpen, closeFunction) {
   useEffect(() => {
     function handleEscClose(event) {
-      if (event.key === 'Escape') {
+      if (event.key === "Escape") {
         closeFunction();
       }
     }
 
     function handleOverlayClick(event) {
-      if (event.target.classList.contains('popup_opened')) {
+      if (event.target.classList.contains("popup_opened")) {
         closeFunction();
       }
     }
 
     if (isOpen) {
-      document.addEventListener('keydown', handleEscClose);
-      document.addEventListener('mousedown', handleOverlayClick);
-    } else {
-      document.removeEventListener('keydown', handleEscClose);
-      document.removeEventListener('mousedown', handleOverlayClick);
+      document.addEventListener("keydown", handleEscClose);
+      document.addEventListener("mousedown", handleOverlayClick);
     }
 
     return () => {
-      document.removeEventListener('keydown', handleEscClose);
-      document.removeEventListener('mousedown', handleOverlayClick);
+      document.removeEventListener("keydown", handleEscClose);
+      document.removeEventListener("mousedown", handleOverlayClick);
     };
   }, [isOpen, closeFunction]);
 }
