@@ -11,7 +11,6 @@ export default function PopupWithForm({
   isLoadingPopup,
   isFormValid = true,
 }) {
-  
   usePopupCloser(isOpen, onClose);
 
   return (

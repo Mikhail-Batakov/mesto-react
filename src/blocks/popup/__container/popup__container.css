@@ -9,6 +9,7 @@
   border-radius: 10px;
   box-sizing: border-box;
   margin: 0 auto;
+
 }
 
 @media (min-width: 768px) {
@@ -17,3 +18,4 @@
     padding: 34px 36px 37px;
   }
 }
+

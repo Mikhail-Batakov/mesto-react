@@ -13,6 +13,7 @@ export default function Main({
   cards,
   isLoading,
   onCardLike,
+  isLoggedIn
 }) {
   const currentUser = useContext(CurrentUserContext);
   const { name, about, avatar } = currentUser;
